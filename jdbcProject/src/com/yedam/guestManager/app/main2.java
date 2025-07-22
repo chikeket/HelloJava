@@ -1,6 +1,8 @@
 package com.yedam.guestManager.app;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,10 +46,13 @@ public class main2 {
 				System.out.println("생년월일\t손님이름\t예약날짜\t\t\t첫방문\t\t\t예약경로");
 				System.out.println("======================================================================");
 				for(int i=0; i<list.size(); i++) {
+					Timestamp tsR = Timestamp.valueOf(list.get(i).getReserDate());
+					Timestamp tsF = Timestamp.valueOf(list.get(i).getFirstDate());					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 					System.out.println(list.get(i).getId()
 							+"\t"+list.get(i).getName()
-							+"\t"+list.get(i).getReserDate()
-							+"\t"+list.get(i).getFirstDate()
+							+"\t"+sdf.format(tsR)
+							+"\t"+sdf.format(tsF)
 							+"\t"+list.get(i).getReserType());
 				}//end of for.
 				break;
@@ -68,15 +73,15 @@ public class main2 {
 				}
 				break;
 			case 3 : // 예약수정.
-				System.out.print("도서번호>> ");
-				 bno = scn.nextInt();scn.nextLine();  // 반환값이 int.
-				System.out.print("도서가격>> ");
-				 price = scn.nextInt();scn.nextLine();  // 반환값이 int.
-				if (dao.update(bno, price)) {
-					System.out.println("정상 등록.");
-				} else {
-					System.out.println("수정 중 오류.");
-				}
+//				System.out.print("도서번호>> ");
+//				 bno = scn.nextInt();scn.nextLine();  // 반환값이 int.
+//				System.out.print("도서가격>> ");
+//				 price = scn.nextInt();scn.nextLine();  // 반환값이 int.
+//				if (dao.update(bno, price)) {
+//					System.out.println("정상 등록.");
+//				} else {
+//					System.out.println("수정 중 오류.");
+//				}
 				break;
 			case 9 : // 종료.
 				run = false;
