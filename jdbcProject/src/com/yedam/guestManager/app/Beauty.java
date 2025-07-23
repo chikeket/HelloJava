@@ -5,8 +5,7 @@ public class Beauty {
 	private int id;
 	private String name;
 	private String reserDate;
-	private String firstDate;
-	private String reVisitDate;
+	private String firstDate;	
 	private String reserType;
 	private String content;
 	private String cut;
@@ -17,10 +16,11 @@ public class Beauty {
 	
 //생성자
 	public Beauty() {}
-	public Beauty(int id, String reserDate, String name) {
+	public Beauty(int id, String reserDate, String name, String reserType) {
 		this.id = id;
 		this.reserDate = reserDate;
 		this.name = name;
+		this.reserType = reserType;
 	}
 	
 
@@ -57,13 +57,7 @@ public class Beauty {
 		this.firstDate = firstDate;
 	}
 
-	public String getReVisitDate() {
-		return reVisitDate;
-	}
-
-	public void setReVisitDate(String reVisitDate) {
-		this.reVisitDate = reVisitDate;
-	}
+	
 
 	public String getReserType() {
 		return reserType;

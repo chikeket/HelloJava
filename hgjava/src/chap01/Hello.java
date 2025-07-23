@@ -72,6 +72,8 @@ public class Hello {
 		// 수는 20을 이용
 		String result12 = userNum % 2 == 0 ? "짝수" : "홀수";
 		System.out.println(result12);
+		String atoto = "true";
+		System.out.print(atoto.equals("truee"));
 	}
 
 }
