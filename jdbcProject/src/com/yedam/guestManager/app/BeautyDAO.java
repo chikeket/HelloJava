@@ -72,35 +72,45 @@ public class BeautyDAO {
 		return list;
 	}
 	// 예약 이력삭제
-	public boolean delete(int id, String name, String userId, String userPw) {
+	public boolean delete(int id, String name, String reserDate, String userId, String userPw) {
 		Connection conn = DBUUtil.getConnect(userId, userPw);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String inputDate = reserDate;
 		String query = "delete beauty "+								
-			           "where id = ? and name = ?";
+			           "where id = ? and name = ? and reser_date = ? ";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
+			Date parsedDate = sdf.parse(inputDate);			
+			Timestamp timestamp = new Timestamp(parsedDate.getTime());
 			stmt.setInt(1, id);
 			stmt.setString(2, name);
+			stmt.setTimestamp(3, timestamp);
 			int r = stmt.executeUpdate();
 			if (r>0) {
 				return true;
 			}
-		} catch (SQLException e) {			
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 		return false;
 	}
 	
 	// 서비스완료 후 예약손님에게 제공한 서비스이력 추가입력
-	public boolean update(int id, String name, String cut, String perm, String care, String intro, String content, String userId, String userPw) {
+	public boolean update(int id, String name, String cut, String perm, String care, String intro, String content, String reserDate, String userId, String userPw) {
 		Connection conn = DBUUtil.getConnect(userId, userPw);
+		//문자열 -> java 스탬프변환
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String inputDate = reserDate;
 		String query = "update beauty "+
 				"set cut = ?,"+
 				    "perm = ?,"+
 				     "care = ?,"+
 				     "introduction = ?,"+
 				     "content = ?"+					
-				"where id = ? and name = ?";
+				"where id = ? and name = ? and reser_date = ? ";
 		try {
+			Date parsedDate = sdf.parse(inputDate);			
+			Timestamp timestamp = new Timestamp(parsedDate.getTime());
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setString(1, cut);
 			stmt.setString(2, perm);
@@ -109,12 +119,13 @@ public class BeautyDAO {
 			stmt.setString(5, content);
 			stmt.setInt(6, id);
 			stmt.setString(7, name);
+			stmt.setTimestamp(8, timestamp);
 			System.out.println(query);
 			int r = stmt.executeUpdate();
 			if (r>0) {
 				return true;
 			}
-		} catch (SQLException e) {				
+		} catch (Exception e) {				
 			e.printStackTrace();
 		}
 		return false;
@@ -155,7 +166,8 @@ public class BeautyDAO {
 					e.printStackTrace();
 				}
 				break loof;
-			}else {
+			}
+			}
 				query = "insert into beauty (id, reser_date, first_date, name, reser_type) values(?,?,?,?,?)";
 				try {
 					Date parsedDate = sdf.parse(inputDate);			
@@ -173,12 +185,8 @@ public class BeautyDAO {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
-				
-			}
-		}
-		
-		
+				}		
+						
 		return false;		
 		
 	}//end of insert

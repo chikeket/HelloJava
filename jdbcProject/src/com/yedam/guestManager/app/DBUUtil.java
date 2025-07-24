@@ -20,7 +20,7 @@ public class DBUUtil {
 		Connection conn = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");			
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", id, pw);
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.17:1521:xe", id, pw); //192.168.0.17
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
