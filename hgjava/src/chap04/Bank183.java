@@ -50,7 +50,7 @@ public class Bank183 {
 			}
 		}
 		System.out.println("은행 프로그램 종료");
-
+sc.close();
 	}//end main
 
 }//end class

@@ -115,7 +115,7 @@ public class Ex149 {
 			System.out.println(yearNum+"년 평년입니다");			
 		}
 		
-		
+		sc.close();
 	}
 
 }
