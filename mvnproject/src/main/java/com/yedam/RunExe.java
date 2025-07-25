@@ -5,7 +5,7 @@ public class RunExe implements Runnable{
 
 	@Override
 	public void run() {
-		System.out.println("달립니다.");		
+		System.out.println("달립니다.");
 	}
-
+	
 }
